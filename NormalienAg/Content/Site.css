@@ -1,24 +1,51 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+body{
+	background-image: url("/Content/Img/background.jpg");
+	background-repeat: repeat;
+	
+	font-family: "Arial Light" !important;
+	font-size: 15px !important;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+#wrapper {
+    margin: 15px auto;
+	padding-top:15px;
+	padding-bottom:15px;
+    max-width: 1024px;
+    box-shadow: 8px 8px #999;
+	background-color:rgba(255,255,255, 0.8); /* Light grey, 50% transparent */
+}
+#header>.row {
+    height: 100%;
+}
+#logoContainer {
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    height: 100%;
+    border-color: purple;
+    overflow: hidden;
+}
+#logoContainer img {
+    max-height: 80px;
+	max-width: 100%;
+}
+#content {
+    border-color: green;
+    min-height: 300px;
+    text-align:center;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.clearer{
+	clear: both; /* see http://stackoverflow.com/questions/19354845/div-has-no-height-even-if-it-has-content */
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+#canvas{
+    margin:auto;
+    max-width:588px;
+    max-height:500px;
+}
+
+#footer hr{
+	border-style:solid;
+	border-color:#AAA;
 }

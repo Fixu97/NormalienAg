@@ -9,33 +9,118 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    <div id="wrapper" class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="logoContainer">
+                    <img src="./Content/Img/logo.png" alt="Logo" />
+                </div>
+                <nav id="header" class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div id="main-navigation" class="collapse navbar-collapse">
+                            <!--Left-->
+                            <ul class="nav navbar-nav">
+
+                                <!--Home-->
+                                <li class="active"><a href="#">Home</a></li>
+
+                                <!--Firma-->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Firma<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Geschichte</a></li>
+                                        <li><a href="#">Team</a></li>
+                                        <li><a href="#">Maschinenpark</a></li>
+                                        <li><a href="#">Kontakt</a></li>
+                                    </ul>
+                                </li>
+
+                                <!--Katalog-->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Katalog<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Normsäulen Gestelle</a></li>
+                                        <li><a href="#">Gusssäulen Gestelle</a></li>
+                                        <li><a href="#">Führungselemente</a></li>
+                                        <li><a href="#">Gewindeformen</a></li>
+                                        <li><a href="#">Federn & Zubehör</a></li>
+                                        <li><a href="#">Preisliste</a></li>
+                                    </ul>
+                                </li>
+
+                                <!--Massanfertigungen-->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Massanfertigungen<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Werkzeugbau</a></li>
+                                        <li><a href="#">Formenbau</a></li>
+                                        <li><a href="#">Teilefertigung</a></li>
+                                        <li><a href="#">Montage</a></li>
+                                        <li><a href="#">Führungselemente</a></li>
+                                        <li><a href="#">Gewindeformen</a></li>
+                                        <li><a href="#">Winkeltisch</a></li>
+                                    </ul>
+                                </li>
+
+                                <!--Kontakt-->
+                                <li><a href="#">Kontakt</a></li>
+
+                            </ul>
+                            <!--End of left-->
+                            <!--Right-->
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <!--Login-->
+                                <li><a href="#">Login</a></li>
+
+                            </ul>
+                            <!--End of right-->
+                        </div>
+                    </div>
+                </nav>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <div class="row">
+            <div id="content" class="col-md-12">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="row">
+            <div id="footer" class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Normalien AG<br />
+                        Freiburgstrasse 450<br />
+                        CH-3018 Bern <br />
+                        <a target="_blank" href="https://www.google.ch/maps/place/Normalien+AG/&gt;46.9301348,7.3871283,14z/data=!4m5!3m4!1s0x0:0x955895d14df066a!8m2!3d46.9331913!4d7.3892605">&gt; Standort</a>
+                    </div>
+                    <div class="col-md-3">
+                        Tel: +41 31 992 18 37
+                    </div>
+                    <div class="col-md-3">
+                        Fax: +41 31 991 12 64
+                    </div>
+                    <div class="col-md-3">
+                        Email: <a href="mailto://info@normalien-ag.ch">info@normalien-ag.ch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
