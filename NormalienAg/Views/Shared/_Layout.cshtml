@@ -15,7 +15,7 @@
                 <div id="logoContainer">
                     <img src="./Content/Img/logo.png" alt="Logo" />
                 </div>
-                <nav id="header" class="navbar navbar-default">
+                <nav id="header" class="navbar navbar-default visible-xs">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
@@ -91,6 +91,7 @@
         </div>
         <div class="row">
             <div id="content" class="col-md-12">
+                <h1>@ViewBag.Title</h1>
                 @RenderBody()
             </div>
         </div>
@@ -120,10 +121,11 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/custom")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -24,6 +24,7 @@ body{
     height: 100%;
     border-color: purple;
     overflow: hidden;
+    text-align: center;
 }
 #logoContainer img {
     max-height: 80px;
