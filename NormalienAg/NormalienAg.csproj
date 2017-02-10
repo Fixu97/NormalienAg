@@ -213,6 +213,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom\canvasManager.js" />
     <Content Include="Scripts\Custom\global.js" />
     <Content Include="Scripts\Custom\Model\canvasImage.js" />
     <Content Include="Scripts\Custom\Model\circle.js" />

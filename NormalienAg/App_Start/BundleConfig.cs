@@ -19,6 +19,7 @@ namespace NormalienAg
                         "~/Scripts/Custom/Model/imageHelper.js",
                         "~/Scripts/Custom/Model/customImage.js",
                         "~/Scripts/Custom/Model/canvasImage.js",
+                        "~/Scripts/Custom/canvasManager.js",
                         "~/Scripts/Custom/global.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

@@ -1,44 +1,46 @@
-window.CanvasImage = function (context, x, y, radius, imgSrc) {
-    'use strict';
+window.CanvasImage = function (canvas, radius, imgSrc) {
+    "use strict";
     
-    this.c = context;
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.imgSrc = imgSrc;
+    radius = validateNumber(radius);
+
+    if (typeof imgSrc !== "string") {
+        throw "Parameter imgSrc should be a string!";
+    }
+
+    var context = canvas.getContext("2d");
     
-    this.getCircle = function () {
-        var circle = new Circle(this.c, this.x, this.y, this.radius, "red");
+    var getCircle = function () {
+        var circle = new Circle(context, radius, "red");
         return circle;
     };
     
-    this.draw = function (completionHandler) {
+    this.draw = function (x, y, completionHandler) {
         
         // Get save instance of 'this'
         var self = this;
         
         // asynchronos call
-        this.getImage(this.imgSrc, function () {
+        this.getImage(imgSrc, function () {
             
             // save context
-            self.c.save();
+            context.save();
             
             // in this context, 'this' is the image
             var img = this,
-                diameter = 2 * self.radius;
+                diameter = 2 * radius;
+
+            var prop = self.getNewImgProportion(img, diameter, diameter);
             
-            var prop = self.getNewImgProportion(img, diameter, diameter)
+            getCircle().draw(x, y);
+            context.clip();
             
-            self.getCircle().draw();
-            self.c.clip();
+            var pos = self.getImgPosFromCenter(x, y, prop.width, prop.height);
             
-            var pos = self.getImgPosFromCenter(self.x, self.y, prop.width, prop.height);
-            
-            self.c.drawImage(img, pos.x, pos.y, prop.width, prop.height);
-            self.c.stroke();
+            context.drawImage(img, pos.x, pos.y, prop.width, prop.height);
+            context.stroke();
             
             // restore contest
-            self.c.restore();
+            context.restore();
             
             // call completionHandler
             if (completionHandler && typeof completionHandler === "function"){

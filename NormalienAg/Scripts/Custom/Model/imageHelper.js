@@ -23,15 +23,8 @@ window.ImageHelper.prototype = {
             throw "Invalid paramteter img!";
         }
         
-        if (isNaN(maxWidth)) {
-            throw "Invalid parameter maxWidth!";
-        }
-        maxWidth = Number(maxWidth);
-        
-        if (isNaN(maxHeight)) {
-            throw "Invalid parameter maxHeight!";
-        }
-        maxHeight = Number(maxHeight);
+        maxWidth = validateNumber(maxWidth);
+        maxHeight = validateNumber(maxHeight);
         
         var aspectRatio = img.width / img.height,
             newWidth,
