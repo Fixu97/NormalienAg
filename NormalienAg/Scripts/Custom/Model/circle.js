@@ -1,19 +1,21 @@
-window.Circle = function (c, radius, color) {
+window.Circle = function (c, x, y, radius, color) {
     "use strict";
 
-    this.c = c;
-    this.radius = validateNumber(radius);
-    this.color = color;
-    
-    this.draw = function (x, y) {
+    if (!isDefined(c)) {
+        throw "Parameter c must be defined!";
+    }
 
-        x = validateNumber(x);
-        y = validateNumber(y);
+    x = validateNumber(x);
+    y = validateNumber(y);
+    radius = validateNumber(radius);
+    color = validateString(color);
+    
+    this.draw = function () {
 
         c.beginPath();
-        c.arc(x, y,this.radius, 0, Math.PI * 2, true);
+        c.arc(x, y, radius, 0, Math.PI * 2, true);
         c.closePath();
-        c.fillStyle = this.color;
+        c.fillStyle = color;
         c.fill();
         c.stroke();
     }

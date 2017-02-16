@@ -1,45 +1,11 @@
 ﻿
-window.CanvasManager = function (canvas) {
+window.CanvasManager = function (canvas, pictoRadius, centerImageUrl, imageUrls) {
     "use strict";
 
     var $canvas = $(canvas);
     var c = canvas.getContext("2d"); // context
-    var circleRadius = 250;
-    var circleCenter = { x: circleRadius, y: circleRadius };
-
-    this.getCircleCenter = function() {
-        return circleCenter;
-    }
-
-    var validateParams = function (i, nrOfPoints) {
-        "use strict";
-
-        if (isNaN(i) || i < 0) {
-            throw "Expected parameter i to be a number >= 0!";
-        }
-        if (isNaN(nrOfPoints) || nrOfPoints < 0) {
-            throw "Expected parameter nrOfPoints to be a number >= 0!";
-        }
-
-        if (i >= nrOfPoints) {
-            throw "Parameter i must be smaller than nrOfPoints!";
-        }
-    }
-
-    var validateCanvasImages = function(canvasImages) {
-        "use strict";
-
-        if (Object.prototype.toString.call(canvasImages) !== "[object Array]") {
-            throw "Parameter canvasImages must be an array!";
-        }
-
-        for (var i = 0; i < canvasImages.length; i++) {
-            if (!(canvasImages[i] instanceof window.CanvasImage)) {
-                throw "Element at position " + i + " is not a canvasImage!";
-            }
-        }
-    }
-
+    var pictoRadius = validateNumber(pictoRadius);
+    
     var scaleCanvas = function () {
 
         var width = 588;
@@ -61,7 +27,50 @@ window.CanvasManager = function (canvas) {
         var c = canvas.getContext("2d");
         c.scale(aspectRatio, aspectRatio);
     }
+    var getRadius = function () {
 
+        if (!isDefined(canvas)){
+            throw "Parameter canvas must be defined!";
+        }
+
+        var width = $canvas.width();
+        var height = $canvas.height();
+        var diameter = 0;
+
+        if (width > height) {
+            diameter = height;
+        } else {
+            diameter = width;
+        }
+
+        return validateNumber(diameter) / 2 - (pictoRadius * 1.5);
+    }
+    var getCenter = function () {
+
+        if (!isDefined(canvas)) {
+            throw "Parameter canvas must be defined!";
+        }
+
+        var width = $canvas.width();
+        var height = $canvas.height();
+
+        return { x: width / 2, y: height / 2 };
+    }
+
+    var validateParams = function (i, nrOfPoints) {
+        "use strict";
+
+        if (isNaN(i) || i < 0) {
+            throw "Expected parameter i to be a number >= 0!";
+        }
+        if (isNaN(nrOfPoints) || nrOfPoints < 0) {
+            throw "Expected parameter nrOfPoints to be a number >= 0!";
+        }
+
+        if (i >= nrOfPoints) {
+            throw "Parameter i must be smaller than nrOfPoints!";
+        }
+    }
     var getAngle = function (i, nrOfPoints) {
         "use strict";
 
@@ -78,28 +87,51 @@ window.CanvasManager = function (canvas) {
 
         validateParams(i, nrOfPoints);
         var angle = getAngle(i, nrOfPoints);
-        return Math.cos(angle) * circleRadius + circleRadius;
+        return Math.cos(angle) * circleRadius + circleCenter.x;
     }
-
     var getPosY = function (i, nrOfPoints) {
         "use strict";
 
         validateParams(i, nrOfPoints);
         var angle = getAngle(i, nrOfPoints);
-        return Math.sin(angle) * (-1) * circleRadius + circleRadius;
+        return Math.sin(angle) * (-1) * circleRadius + circleCenter.y;
     }
-
-    var getPositions = function(i, nrOfPoints) {
+    var getPositions = function (i, nrOfPoints) {
         return {
-            x: getPosX(i, nrOfPoints), 
+            x: getPosX(i, nrOfPoints),
             y: getPosY(i, nrOfPoints)
         };
     }
+    var getCanvasImage = function (x, y, imgUrl) {
+        return new CanvasImage(canvas, x, y, pictoRadius, imgUrl);
+    }
+    var getCanvasImages = function () {
 
-    this.draw = function(canvasImages) {
+        if (!isArray(imageUrls)) {
+            throw "Parameter imageUrls must be an array!";
+        }
+
+        var canvasImages = [];
+        for (var i = 0; i < imageUrls.length; i++) {
+
+            var pos = getPositions(i, imageUrls.length);
+
+            canvasImages.push(getCanvasImage(pos.x, pos.y, imageUrls[i]));
+        }
+
+        return canvasImages;
+    }
+
+    // initialize canvas
+    scaleCanvas();
+    
+    var circleRadius = getRadius();
+    var circleCenter = getCenter();
+    var centerImage = getCanvasImage(circleCenter.x, circleCenter.y, centerImageUrl);
+    var canvasImages = getCanvasImages();
+    
+    this.draw = function() {
         "use strict";
-
-        validateCanvasImages(canvasImages);
 
         scaleCanvas();
         c.save();
@@ -110,10 +142,8 @@ window.CanvasManager = function (canvas) {
             c.lineWidth = 2;
             c.beginPath();
 
-            var pos = getPositions(i, canvasImages.length);
-
             // Set pen on position
-            c.moveTo(pos.x, pos.y);
+            c.moveTo(curImg.getX(), curImg.getY());
 
             // Move to position
             c.lineTo(
@@ -123,12 +153,68 @@ window.CanvasManager = function (canvas) {
             c.closePath();
             c.stroke();
 
-            curImg.draw(pos.x, pos.y);
+            curImg.draw();
         }
+        centerImage.draw();
         c.restore();
     }
 
+    var hoveredImage = null;
+
+    var hoverAction = function (e) {
+        "use strict";
+
+        var curHoveredImg = null
+        for (var i = 0; i < canvasImages.length; i++) {
+
+            var curImg = canvasImages[i];
+
+            if (!curImg.isAtPosition(e.offsetX, e.offsetY)) {
+                continue;
+            }
+            curHoveredImg = curImg;
+        }
+
+        if (curHoveredImg === null && centerImage.isAtPosition(e.offsetX, e.offsetY)) {
+            curHoveredImg = centerImage;
+        }
+
+        // No image is being hovered
+        if (curHoveredImg === null && hoveredImage === null) {
+            return;
+        }
+
+        // A new img is being hovered
+        if (curHoveredImg !== null && (hoveredImage === null || hoveredImage !== curHoveredImg)) {
+            curHoveredImg.draw(pictoRadius * 1.2);
+            hoveredImage = curHoveredImg;
+            return;
+        }
+
+        // An img is not hovered anymore
+        if (curHoveredImg === null && hoveredImage !== null) {
+            hoveredImage = null;
+            self.draw() ;
+        }
+    }
+    var clickAction = function (e) {
+        "use strict";
+
+        for (var i = 0; i < canvasImages.length; i++) {
+
+            var curImg = canvasImages[i];
+
+            if (!curImg.isAtPosition(e.offsetX, e.offsetY)) {
+                continue;
+            }
+            console.log("CanvasImage is being clicked!");
+        }
+    }
+
     // add event listener
-    $(window).on("resize", scaleCanvas);
+    var self = this;
+    $(window).on("resize", self.draw);
+    $(canvas).mousemove($.proxy(hoverAction, self));
+    $(canvas).click($.proxy(clickAction, self));
 
 }
