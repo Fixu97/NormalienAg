@@ -16,6 +16,7 @@ namespace NormalienAg
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                         "~/Scripts/Custom/Model/circle.js",
+                        "~/Scripts/Custom/Model/imageDescription.js",
                         "~/Scripts/Custom/Model/imageHelper.js",
                         "~/Scripts/Custom/Model/customImage.js",
                         "~/Scripts/Custom/Model/canvasImage.js",

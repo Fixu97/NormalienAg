@@ -1,15 +1,13 @@
-window.CanvasImage = function (canvas, x, y, radius, imgSrc) {
+window.CanvasImage = function (canvas, x, y, radius, imgSrc, imgDescription/*, forwardUrl*/) {
     "use strict";
     
     x = validateNumber(x);
     y = validateNumber(y);
     radius = validateNumber(radius);
+    imgSrc = validateString(imgSrc);
+    //forwardUrl = validateString(forwardUrl);
+
     var isHovered = false;
-
-    if (typeof imgSrc !== "string") {
-        throw "Parameter imgSrc should be a string!";
-    }
-
     var context = canvas.getContext("2d");
 
     var draw = function (radius, self) {
@@ -28,7 +26,13 @@ window.CanvasImage = function (canvas, x, y, radius, imgSrc) {
             var prop = self.getNewImgProportion(img, diameter, diameter);
 
             var circle = new Circle(context, x, y, radius, "green");
-            circle.draw();
+
+            var lineWidth;
+            if (isHovered) {
+                lineWidth = 4;
+            }
+
+            circle.draw(lineWidth);
             context.clip();
 
             var pos = self.getImgPosFromCenter(x, y, prop.width, prop.height);
@@ -38,6 +42,7 @@ window.CanvasImage = function (canvas, x, y, radius, imgSrc) {
 
             // restore contest
             context.restore();
+            imgDescription.print();
         });
     }
     
@@ -47,10 +52,12 @@ window.CanvasImage = function (canvas, x, y, radius, imgSrc) {
     this.getY = function () {
         return y;
     };
-    this.draw = function (radiusParam) {
+    this.draw = function (radiusParam, hovered) {
         if (typeof (radiusParam) === "undefined") {
+            isHovered = false;
             draw(radius, this);
         } else {
+            isHovered = hovered;
             draw(radiusParam, this);
         }
     };    

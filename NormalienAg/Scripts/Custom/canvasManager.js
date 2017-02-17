@@ -1,5 +1,5 @@
 ﻿
-window.CanvasManager = function (canvas, pictoRadius, centerImageUrl, imageUrls) {
+window.CanvasManager = function (canvas, pictoRadius, centerImageUrl, centerDescription, imageUrls, imageDescriptions) {
     "use strict";
 
     var $canvas = $(canvas);
@@ -102,8 +102,8 @@ window.CanvasManager = function (canvas, pictoRadius, centerImageUrl, imageUrls)
             y: getPosY(i, nrOfPoints)
         };
     }
-    var getCanvasImage = function (x, y, imgUrl) {
-        return new CanvasImage(canvas, x, y, pictoRadius, imgUrl);
+    var getCanvasImage = function (x, y, imgUrl, imageDescription) {
+        return new CanvasImage(canvas, x, y, pictoRadius, imgUrl, imageDescription);
     }
     var getCanvasImages = function () {
 
@@ -116,7 +116,7 @@ window.CanvasManager = function (canvas, pictoRadius, centerImageUrl, imageUrls)
 
             var pos = getPositions(i, imageUrls.length);
 
-            canvasImages.push(getCanvasImage(pos.x, pos.y, imageUrls[i]));
+            canvasImages.push(getCanvasImage(pos.x, pos.y, imageUrls[i], imageDescriptions[i]));
         }
 
         return canvasImages;
@@ -127,7 +127,7 @@ window.CanvasManager = function (canvas, pictoRadius, centerImageUrl, imageUrls)
     
     var circleRadius = getRadius();
     var circleCenter = getCenter();
-    var centerImage = getCanvasImage(circleCenter.x, circleCenter.y, centerImageUrl);
+    var centerImage = getCanvasImage(circleCenter.x, circleCenter.y, centerImageUrl, centerDescription);
     var canvasImages = getCanvasImages();
     
     this.draw = function() {
@@ -186,7 +186,8 @@ window.CanvasManager = function (canvas, pictoRadius, centerImageUrl, imageUrls)
 
         // A new img is being hovered
         if (curHoveredImg !== null && (hoveredImage === null || hoveredImage !== curHoveredImg)) {
-            curHoveredImg.draw(pictoRadius * 1.2);
+            curHoveredImg.draw(pictoRadius * 1.2, true);
+            $canvas.css("cursor", "pointer");
             hoveredImage = curHoveredImg;
             return;
         }
@@ -194,7 +195,8 @@ window.CanvasManager = function (canvas, pictoRadius, centerImageUrl, imageUrls)
         // An img is not hovered anymore
         if (curHoveredImg === null && hoveredImage !== null) {
             hoveredImage = null;
-            self.draw() ;
+            self.draw();
+            $canvas.css("cursor", "default");
         }
     }
     var clickAction = function (e) {

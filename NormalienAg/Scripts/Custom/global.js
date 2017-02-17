@@ -4,18 +4,33 @@ $(window).on("load", function () {
     canvas = document.getElementById("canvas");
 
     var circleRadius = 50;
+
+    var imageDescriptions = [
+    new ImageDescription("Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+    new ImageDescription("Werkzeugbau", ["Plattenbearbeitungen", "Schnittwerkzeuge", "Biegewerkzeuge", "Konstruktionen", "Hartbearbeitungen"]),
+    new ImageDescription("Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+    new ImageDescription("Download", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+    new ImageDescription("Gewindeformen", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+    new ImageDescription("Führungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+    new ImageDescription("Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"])
+    ];
+
     var cImages = [
-        "/Content/Img/drehbank.jpg",
-        "/Content/Img/cnc.jpg",
-        "/Content/Img/team.jpg",
-        "/Content/Img/werkzeuge.jpg",
-        "/Content/Img/teil1.jpg"];
+        "/Content/Img/formenbau.jpeg",
+        "/Content/Img/werkzeugbau.jpeg",
+        "/Content/Img/maschinenbau.jpeg",
+        "/Content/Img/download.png",
+        "/Content/Img/gewindeformen.jpeg",
+        "/Content/Img/fuehrungselemente.png",
+        "/Content/Img/montage.jpeg"];
 
     canvasManager = new CanvasManager(
         canvas,
         circleRadius,
-        "/Content/Img/building.jpg",
-        cImages);
+        "/Content/Img/building.jpeg",
+        new ImageDescription("Firma", ["Kontakt", "Team", "Geschichte"]),
+        cImages,
+        imageDescriptions);
     
     // Draw elements
     drawCanvas();
