@@ -24,7 +24,7 @@ body{
     height: 100%;
     border-color: purple;
     overflow: hidden;
-    text-align: center;
+    text-align: left;
 }
 #logoContainer img {
     max-height: 80px;
@@ -41,9 +41,18 @@ body{
 }
 
 #canvas{
-    margin:auto;
-    max-width:588px;
-    max-height:500px;
+    float:left;
+    display:inline-block;
+}
+#descriptionContainer{
+    display:inline-block;
+    float:left;
+    max-width:50%;
+    border-left-style:solid;
+    border-width:2px;
+    border-color:black;
+    font-size: 30px;
+    text-align:left;
 }
 
 #footer hr{

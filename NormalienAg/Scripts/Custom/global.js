@@ -3,7 +3,7 @@ $(window).on("load", function () {
     // Get canvas
     canvas = document.getElementById("canvas");
 
-    var circleRadius = 50;
+    var circleRadius = 55;
 
     var imageDescriptions = [
     new ImageDescription("Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
@@ -11,7 +11,7 @@ $(window).on("load", function () {
     new ImageDescription("Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
     new ImageDescription("Download", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
     new ImageDescription("Gewindeformen", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-    new ImageDescription("Führungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+    new ImageDescription("F&uuml;hrungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
     new ImageDescription("Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"])
     ];
 

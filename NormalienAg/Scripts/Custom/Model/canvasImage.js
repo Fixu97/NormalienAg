@@ -42,7 +42,13 @@ window.CanvasImage = function (canvas, x, y, radius, imgSrc, imgDescription/*, f
 
             // restore contest
             context.restore();
-            imgDescription.print();
+
+            // display description  
+            if (isHovered) {
+                imgDescription.print();
+            } else {
+                $("#descriptionContainer").empty();
+            }
         });
     }
     
