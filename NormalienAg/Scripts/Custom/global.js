@@ -1,7 +1,7 @@
-$(window).on("load", function () {
+﻿$(window).on("load", function () {
     
     // Get canvas
-    canvas = document.getElementById("canvas");
+    var canvas = document.getElementById("canvas");
 
     var circleRadius = 55;
 
@@ -11,7 +11,7 @@ $(window).on("load", function () {
     new ImageDescription("Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
     new ImageDescription("Download", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
     new ImageDescription("Gewindeformen", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-    new ImageDescription("F&uuml;hrungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+    new ImageDescription("Führungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
     new ImageDescription("Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"])
     ];
 
@@ -24,7 +24,7 @@ $(window).on("load", function () {
         "/Content/Img/fuehrungselemente.png",
         "/Content/Img/montage.jpeg"];
 
-    canvasManager = new CanvasManager(
+    var canvasManager = new CanvasManager(
         canvas,
         circleRadius,
         "/Content/Img/building.jpeg",
@@ -33,14 +33,23 @@ $(window).on("load", function () {
         imageDescriptions);
     
     // Draw elements
-    drawCanvas();
-});
-
-drawCanvas = function () {
-
     canvasManager.draw();
 
-    return;
+    resizeDescriptionContainer();
+
+    // register event listener
+    $(window).on("resize", resizeDescriptionContainer);
+});
+
+resizeDescriptionContainer = function() {
+    var $descContainer = $("#descriptionContainer");
+    var $canvas = $("#canvas");
+
+    var width = $descContainer.parent().width() - $canvas.outerWidth(true) - $descContainer.outerWidth(true);
+    var height = $canvas.height();
+
+    $descContainer.width(width);
+    $descContainer.height(height);
 }
 
 

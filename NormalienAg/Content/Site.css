@@ -22,7 +22,6 @@ body{
     background-size: auto 100%;
     background-repeat: no-repeat;
     height: 100%;
-    border-color: purple;
     overflow: hidden;
     text-align: left;
 }
@@ -48,11 +47,18 @@ body{
     display:inline-block;
     float:left;
     max-width:50%;
-    border-left-style:solid;
-    border-width:2px;
-    border-color:black;
     font-size: 30px;
     text-align:left;
+    height: 100%;
+    background-color: #D5D5D5;
+    box-shadow: 4px 4px #999;
+    padding: 10px;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+    font-weight: normal;
 }
 
 #footer hr{
