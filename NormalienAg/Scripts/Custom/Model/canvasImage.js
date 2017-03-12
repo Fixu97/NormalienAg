@@ -1,14 +1,15 @@
-window.CanvasImage = function (canvas, x, y, radius, imgSrc, imgDescription/*, forwardUrl*/) {
+window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescription/*, forwardUrl*/) {
     "use strict";
-    
-    x = validateNumber(x);
-    y = validateNumber(y);
     radius = validateNumber(radius);
+    hoverFactor = validateNumber(hoverFactor);
     imgSrc = validateString(imgSrc);
     //forwardUrl = validateString(forwardUrl);
 
     var isHovered = false;
     var context = canvas.getContext("2d");
+
+    var x = 0;
+    var y = 0;
 
     var draw = function (radius, self) {
         "use strict";
@@ -25,7 +26,7 @@ window.CanvasImage = function (canvas, x, y, radius, imgSrc, imgDescription/*, f
 
             var prop = self.getNewImgProportion(img, diameter, diameter);
 
-            var circle = new Circle(context, x, y, radius, "green");
+            var circle = new Circle(context, x, y, radius, "rgba(150, 150, 150, 0.8)");
 
             var lineWidth;
             if (isHovered) {
@@ -55,17 +56,23 @@ window.CanvasImage = function (canvas, x, y, radius, imgSrc, imgDescription/*, f
     this.getX = function () {
         return x;
     };
+    this.setX = function (posX) {
+        x = validateNumber(posX);
+    };
     this.getY = function () {
         return y;
     };
-    this.draw = function (radiusParam, hovered) {
-        if (typeof (radiusParam) === "undefined") {
-            isHovered = false;
-            draw(radius, this);
-        } else {
-            isHovered = hovered;
-            draw(radiusParam, this);
+    this.setY = function (posY) {
+        y = validateNumber(posY);
+    };
+    this.draw = function (hovered) {
+
+        isHovered = validateBool(hovered);
+        var curRadius = radius;
+        if (isHovered) {
+            curRadius *= hoverFactor;
         }
+        draw(curRadius, this);
     };    
     this.isAtPosition = function (mouseX, mouseY) {
 

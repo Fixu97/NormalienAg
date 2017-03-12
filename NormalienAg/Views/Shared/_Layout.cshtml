@@ -10,12 +10,56 @@
 </head>
 <body>
     <div id="wrapper" class="container-fluid">
-        <div class="row">
+
+        <!--Start of desktop navigation-->
+        <div class="row hidden-xs">
+            <div class="col-md-4">
+                <div id="logoContainer">
+                    <p><img src="./Content/Img/logo.png" alt="Logo" /></p>
+                    <p>Freiburgstrasse 450  CH-3018 Bern</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <br />
+                <div class="row">
+                    <div class="col-md-6">• Werkzeug & Formenbau</div>
+                    <div class="col-md-6">• Führungselemente</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">• CNC-Fertigung</div>
+                    <div class="col-md-6">• Maschinenbau</div>
+                </div>
+            </div>
+            <div class="col-md-3" id="header-contact">
+                <table>
+                    <tr>
+                        <td>Tel.</td>
+                        <td>031 992 18 37</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile</td>
+                        <td>079 296 52 33</td>
+                    </tr>
+                    <tr>
+                        <td>Fax</td>
+                        <td>031 991 12 65</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><a href="mailto:info@normalien-ag.ch">info@normalien-ag.ch</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--End of desktop navigation-->
+
+        <!--Start of mobile navigation-->
+        <div class="row  visible-xs">
             <div class="col-md-12">
                 <div id="logoContainer">
                     <img src="./Content/Img/logo.png" alt="Logo" />
                 </div>
-                <nav id="header" class="navbar navbar-default visible-xs">
+                <nav id="header" class="navbar navbar-default">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
@@ -89,19 +133,30 @@
                 </nav>
             </div>
         </div>
+        <!--End of mobile navigation-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr />
+            </div>
+        </div>
+
         <div class="row">
             <div id="content" class="col-md-12">
                 <h1>@ViewBag.Title</h1>
                 @RenderBody()
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr />
+            </div>
+        </div>
+
         <div class="row">
             <div id="footer" class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr />
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-3">
                         Normalien AG<br />

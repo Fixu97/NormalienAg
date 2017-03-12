@@ -7,6 +7,17 @@ body{
 	font-size: 15px !important;
 }
 
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+    font-weight: normal;
+}
+
+hr{
+	border-style:solid;
+	border-color:#AAA;
+}
+
 #wrapper {
     margin: 15px auto;
 	padding-top:15px;
@@ -25,9 +36,20 @@ body{
     overflow: hidden;
     text-align: left;
 }
+
 #logoContainer img {
     max-height: 80px;
 	max-width: 100%;
+}
+#logoContainer p {
+    margin:0;
+    font-style:italic;
+}
+#header-contact table{
+    float:right;
+}
+#header-contact table td:nth-child(2){
+    text-align:right;
 }
 #content {
     border-color: green;
@@ -54,14 +76,4 @@ body{
     box-shadow: 4px 4px #999;
     padding: 10px;
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 100;
-    font-weight: normal;
-}
-
-#footer hr{
-	border-style:solid;
-	border-color:#AAA;
 }

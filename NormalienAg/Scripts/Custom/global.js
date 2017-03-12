@@ -2,8 +2,66 @@
     
     // Get canvas
     var canvas = document.getElementById("canvas");
-
     var circleRadius = 55;
+    var hoverfactor = 2;
+
+    var formenbau = new CanvasImage(
+        canvas,
+        circleRadius,
+        hoverfactor,
+        "/Content/Img/formenbau.jpeg",
+        new ImageDescription("Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
+
+    var werkzeugbau = new CanvasImage(
+        canvas,
+        circleRadius,
+        hoverfactor,
+        "/Content/Img/werkzeugbau.jpeg",
+        new ImageDescription("Werkzeugbau", ["Plattenbearbeitungen", "Schnittwerkzeuge", "Biegewerkzeuge", "Konstruktionen", "Hartbearbeitungen"]));
+
+    var maschinenbau = new CanvasImage(
+        canvas,
+        circleRadius,
+        hoverfactor,
+        "/Content/Img/maschinenbau.jpeg",
+        new ImageDescription("Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
+
+    var download = new CanvasImage(
+        canvas,
+        circleRadius,
+        hoverfactor,
+        "/Content/Img/download.png",
+        new ImageDescription("Download", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
+
+    var gewindeformen = new CanvasImage(
+        canvas,
+        circleRadius,
+        hoverfactor,
+        "/Content/Img/gewindeformen.jpeg",
+        new ImageDescription("Gewindeformen", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
+
+    var fuehrungsElemente = new CanvasImage(
+        canvas,
+        circleRadius,
+        hoverfactor,
+        "/Content/Img/fuehrungselemente.png",
+        new ImageDescription("Führungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
+
+    var montage = new CanvasImage(
+        canvas,
+        circleRadius,
+        hoverfactor,
+        "/Content/Img/montage.jpeg",
+        new ImageDescription("Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
+
+    var canvasImages = [formenbau, werkzeugbau, maschinenbau, download, gewindeformen, fuehrungsElemente, montage];
+
+    var kontakt = new CanvasImage(
+        canvas,
+        circleRadius,
+        hoverfactor,
+        "/Content/Img/building.jpeg",
+        new ImageDescription("Firma", ["Kontakt", "Team", "Geschichte"]));
 
     var imageDescriptions = [
     new ImageDescription("Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
@@ -15,22 +73,12 @@
     new ImageDescription("Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"])
     ];
 
-    var cImages = [
-        "/Content/Img/formenbau.jpeg",
-        "/Content/Img/werkzeugbau.jpeg",
-        "/Content/Img/maschinenbau.jpeg",
-        "/Content/Img/download.png",
-        "/Content/Img/gewindeformen.jpeg",
-        "/Content/Img/fuehrungselemente.png",
-        "/Content/Img/montage.jpeg"];
-
     var canvasManager = new CanvasManager(
         canvas,
         circleRadius,
-        "/Content/Img/building.jpeg",
-        new ImageDescription("Firma", ["Kontakt", "Team", "Geschichte"]),
-        cImages,
-        imageDescriptions);
+        hoverfactor,
+        kontakt,
+        canvasImages);
     
     // Draw elements
     canvasManager.draw();
