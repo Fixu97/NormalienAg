@@ -22,7 +22,7 @@ hr{
     margin: 15px auto;
 	padding-top:15px;
 	padding-bottom:15px;
-    max-width: 1024px;
+    max-width: 1200px;
     box-shadow: 8px 8px #999;
 	background-color:rgba(255,255,255, 0.8); /* Light grey, 50% transparent */
 }
@@ -38,12 +38,10 @@ hr{
 }
 
 #logoContainer img {
-    max-height: 80px;
+    max-height: 100px;
 	max-width: 100%;
 }
-#logoContainer p {
-    margin:0;
-    font-style:italic;
+#header-bulletPoints {
 }
 #header-contact table{
     float:right;
