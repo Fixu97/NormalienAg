@@ -226,6 +226,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Custom\canvasManager.js" />
     <Content Include="Scripts\Custom\global.js" />
+    <Content Include="Scripts\Custom\Model\canvasConfig.js" />
     <Content Include="Scripts\Custom\Model\canvasImage.js" />
     <Content Include="Scripts\Custom\Model\circle.js" />
     <Content Include="Scripts\Custom\Model\customImage.js" />

@@ -2,76 +2,39 @@
     
     // Get canvas
     var canvas = document.getElementById("canvas");
-    var circleRadius = 55;
+    var context = canvas.getContext("2d");
+
+    resizeDescriptionContainer();
+
+    var circleRadius = 70;
     var hoverfactor = 2;
 
-    var formenbau = new CanvasImage(
-        canvas,
-        circleRadius,
-        hoverfactor,
-        "/Content/Img/formenbau.jpeg",
-        new ImageDescription("Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
-
-    var werkzeugbau = new CanvasImage(
-        canvas,
-        circleRadius,
-        hoverfactor,
-        "/Content/Img/werkzeugbau.jpeg",
-        new ImageDescription("Werkzeugbau", ["Plattenbearbeitungen", "Schnittwerkzeuge", "Biegewerkzeuge", "Konstruktionen", "Hartbearbeitungen"]));
-
-    var maschinenbau = new CanvasImage(
-        canvas,
-        circleRadius,
-        hoverfactor,
-        "/Content/Img/maschinenbau.jpeg",
-        new ImageDescription("Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
-
-    var download = new CanvasImage(
-        canvas,
-        circleRadius,
-        hoverfactor,
-        "/Content/Img/download.png",
-        new ImageDescription("Download", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
-
-    var gewindeformen = new CanvasImage(
-        canvas,
-        circleRadius,
-        hoverfactor,
-        "/Content/Img/gewindeformen.jpeg",
-        new ImageDescription("Gewindeformen", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
-
-    var fuehrungsElemente = new CanvasImage(
-        canvas,
-        circleRadius,
-        hoverfactor,
-        "/Content/Img/fuehrungselemente.png",
-        new ImageDescription("Führungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
-
-    var montage = new CanvasImage(
-        canvas,
-        circleRadius,
-        hoverfactor,
-        "/Content/Img/montage.jpeg",
-        new ImageDescription("Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]));
-
-    var canvasImages = [formenbau, werkzeugbau, maschinenbau, download, gewindeformen, fuehrungsElemente, montage];
+    var canvasImages = getImages(canvas, circleRadius, hoverfactor,
+        [
+            "/Content/Img/Index/formenbau.jpeg",
+            "/Content/Img/Index/werkzeugbau.jpeg",
+            "/Content/Img/Index/maschinenbau.jpeg",
+            "/Content/Img/Index/download.png",
+            "/Content/Img/Index/gewindeformen.jpeg",
+            "/Content/Img/Index/fuehrungselemente.png",
+            "/Content/Img/Index/montage.jpeg"
+        ],
+        [
+            new ImageDescription(canvas, "Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+            new ImageDescription(canvas, "Werkzeugbau", ["Plattenbearbeitungen", "Schnittwerkzeuge", "Biegewerkzeuge", "Konstruktionen", "Hartbearbeitungen"]),
+            new ImageDescription(canvas, "Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+            new ImageDescription(canvas, "Download", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+            new ImageDescription(canvas, "Gewindeformen", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+            new ImageDescription(canvas, "Führungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
+            new ImageDescription(canvas, "Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"])
+        ]);
 
     var kontakt = new CanvasImage(
         canvas,
         circleRadius,
         hoverfactor,
-        "/Content/Img/building.jpeg",
-        new ImageDescription("Firma", ["Kontakt", "Team", "Geschichte"]));
-
-    var imageDescriptions = [
-    new ImageDescription("Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-    new ImageDescription("Werkzeugbau", ["Plattenbearbeitungen", "Schnittwerkzeuge", "Biegewerkzeuge", "Konstruktionen", "Hartbearbeitungen"]),
-    new ImageDescription("Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-    new ImageDescription("Download", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-    new ImageDescription("Gewindeformen", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-    new ImageDescription("Führungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-    new ImageDescription("Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"])
-    ];
+        "/Content/Img/Index/building.jpeg",
+        new ImageDescription(canvas, "Firma", ["Kontakt", "Team", "Geschichte"]));
 
     var canvasManager = new CanvasManager(
         canvas,
@@ -82,8 +45,6 @@
     
     // Draw elements
     canvasManager.draw();
-
-    resizeDescriptionContainer();
 
     // register event listener
     $(window).on("resize", resizeDescriptionContainer);
@@ -98,6 +59,24 @@ resizeDescriptionContainer = function() {
 
     $descContainer.width(width);
     $descContainer.height(height);
+}
+
+getImages = function (canvas, radius, hoverFactor, imgLinks, imgDescriptions) {
+
+    if (!isArray(imgLinks) || !isArray(imgDescriptions)) {
+        throw "links and descriptions must be arrays!";
+    }
+
+    if (imgLinks.length !== imgDescriptions.length) {
+        throw "link list and description list must have the same length!";
+    }
+
+    var retList = [];
+    for (var i = 0; i < imgLinks.length; i++) {
+        retList.push(new CanvasImage(canvas, radius, hoverFactor, imgLinks[i], imgDescriptions[i]));
+    }
+
+    return retList;
 }
 
 

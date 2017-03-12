@@ -9,8 +9,8 @@ window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, 
     
     var scaleCanvas = function () {
 
-        var width = 600;
-        var height = 600;
+        var width = 750;
+        var height = 750;
 
         var parentWidth = $canvas.parent().width();
 

@@ -3,6 +3,11 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
     radius = validateNumber(radius);
     hoverFactor = validateNumber(hoverFactor);
     imgSrc = validateString(imgSrc);
+
+    if (!isDefined(imgDescription) || !(imgDescription instanceof ImageDescription)) {
+        throw "imgDescription must be of type 'ImageDescription'!";
+    }
+
     //forwardUrl = validateString(forwardUrl);
 
     var isHovered = false;
@@ -21,12 +26,13 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
             context.save();
 
             // in this context, 'this' is the image
-            var img = this,
-                diameter = 2 * radius;
+            var img = this;
+            var diameter = 2 * radius;
+            var fillColor = "rgba(150, 150, 150, 0.8)";
 
             var prop = self.getNewImgProportion(img, diameter, diameter);
 
-            var circle = new Circle(context, x, y, radius, "rgba(150, 150, 150, 0.8)");
+            var circle = new Circle(context, x, y, radius, fillColor);
 
             var lineWidth;
             if (isHovered) {
@@ -41,15 +47,27 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
             context.drawImage(img, pos.x, pos.y, prop.width, prop.height);
             context.stroke();
 
-            // restore contest
-            context.restore();
-
             // display description  
             if (isHovered) {
+                // save previous fillStyle
+                var previousFillStyle = context.fillStyle;
+
+                // set fillStyle
+                context.fillStyle = fillColor;
+
+                // fill
+                context.fill();
+
+                // reset fillStyle
+                context.fillStyle = previousFillStyle;
+
                 imgDescription.print();
             } else {
                 $("#descriptionContainer").empty();
             }
+
+            // restore context
+            context.restore();
         });
     }
     
@@ -58,12 +76,14 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
     };
     this.setX = function (posX) {
         x = validateNumber(posX);
+        imgDescription.setX(x);
     };
     this.getY = function () {
         return y;
     };
     this.setY = function (posY) {
         y = validateNumber(posY);
+        imgDescription.setY(y);
     };
     this.draw = function (hovered) {
 
