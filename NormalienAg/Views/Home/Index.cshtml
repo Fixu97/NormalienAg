@@ -1,3 +1,11 @@
-﻿<canvas id="canvas">
-    Your browser does not support the canvas element...
-</canvas>
+﻿<div class="hidden-xs hidden-sm" style="text-align:center;">
+    <canvas id="canvas">
+        Your browser does not support the canvas element...
+    </canvas>
+</div>
+<div class="hidden-md hidden-lg">
+    @Html.Partial("~/Views/Home/Contact.cshtml")
+</div>
+
+
+@Scripts.Render("~/bundles/custom")

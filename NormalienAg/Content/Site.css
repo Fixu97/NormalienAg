@@ -7,7 +7,6 @@ body{
 	font-size: 15px !important;
 }
 
-
 h1, h2, h3, h4, h5, h6 {
     font-weight: 100;
     font-weight: normal;
@@ -29,6 +28,9 @@ hr{
 #header>.row {
     height: 100%;
 }
+
+/* Home */
+
 #logoContainer {
     background-size: auto 100%;
     background-repeat: no-repeat;
@@ -46,13 +48,13 @@ hr{
 #header-contact table{
     float:right;
 }
-#header-contact table td:nth-child(2){
+.contact-table td:nth-child(2){
     text-align:right;
 }
 #content {
     border-color: green;
     min-height: 300px;
-    text-align:center;
+    text-align:left;
 }
 
 .clearer{
@@ -61,4 +63,15 @@ hr{
 
 #canvas{
     display:inline-block;
+}
+
+/*End of Home*/
+
+/*Start of Contact*/
+
+.contact-block-50{
+    text-align:left;
+    display:inline-block;
+    float:left;
+    width: 49%;
 }

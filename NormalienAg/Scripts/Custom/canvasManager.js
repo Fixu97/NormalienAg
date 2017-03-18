@@ -215,14 +215,21 @@ window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, 
     var clickAction = function (e) {
         "use strict";
 
+        var clickedImg = null;
         for (var i = 0; i < canvasImages.length; i++) {
 
             var curImg = canvasImages[i];
 
-            if (!curImg.isAtPosition(e.offsetX, e.offsetY)) {
-                continue;
+            if (curImg.isAtPosition(e.offsetX, e.offsetY)) {
+                console.log("CanvasImage is being clicked!");
+                curImg.openSite();
+                return;
             }
-            console.log("CanvasImage is being clicked!");
+        }
+
+        if (centerImage.isAtPosition(e.offsetX, e.offsetY)) {
+            console.log("CenterImage is being clicked!");
+            centerImage.openSite();
         }
     }
 

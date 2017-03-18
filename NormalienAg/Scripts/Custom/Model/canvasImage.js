@@ -1,4 +1,4 @@
-window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescription/*, forwardUrl*/) {
+window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescription, forwardUrl) {
     "use strict";
     radius = validateNumber(radius);
     hoverFactor = validateNumber(hoverFactor);
@@ -8,7 +8,7 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
         throw "imgDescription must be of type 'ImageDescription'!";
     }
 
-    //forwardUrl = validateString(forwardUrl);
+    forwardUrl = validateString(forwardUrl);
 
     var isHovered = false;
     var context = canvas.getContext("2d");
@@ -104,6 +104,9 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
 
         return correctX && correctY;
     };
+    this.openSite = function () {
+        window.open(forwardUrl, "self");
+    }
 };
 
 window.CanvasImage.prototype = Object.create(window.ImageHelper.prototype);

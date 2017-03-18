@@ -1,17 +1,43 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<div class="contact-block-50">
+    <h3>Adresse</h3>
+    <address>
+        Normalien AG <br />
+        Freiburgstrasse 450 <br />
+        CH-3018 Bern <br />
+    </address>
+</div>
+<div class="contact-block-50">
+    <h3>Kontakt</h3>
+    <p>
+        <address>
+            <table class="contact-table">
+                <tr>
+                    <td>Tel.</td>
+                    <td>031 992 18 37</td>
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td>079 296 52 33</td>
+                </tr>
+                <tr>
+                    <td>Fax</td>
+                    <td>031 991 12 65</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><a href="mailto:info@normalien-ag.ch">info@normalien-ag.ch</a></td>
+                </tr>
+            </table>
+        </address>
+    </p>
+</div>
+<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10219.201692658773!2d7.381626610365109!3d46.93493414396595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e38de68358feb%3A0xc4157e2dddba0873!2sFreiburgstrasse+450%2C+3018+Bern!5e0!3m2!1sde!2sch!4v1489839771170"
+        style="width:100%"
+        allowfullscreen>
+        Your browser does not support iframes...
+</iframe>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<script>
+    var width = $("#map").parent().width();
+    $("#map").height(width * 0.75);
+</script>

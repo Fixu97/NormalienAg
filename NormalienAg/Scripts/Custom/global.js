@@ -20,6 +20,15 @@
             "/Content/Img/Index/montage.jpeg"
         ],
         [
+            "#",
+            "#",
+            "#",
+            "#",
+            "#",
+            "#",
+            "#"
+        ],
+        [
             new ImageDescription(canvas, "Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
             new ImageDescription(canvas, "Werkzeugbau", ["Plattenbearbeitungen", "Schnittwerkzeuge", "Biegewerkzeuge", "Konstruktionen", "Hartbearbeitungen"]),
             new ImageDescription(canvas, "Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
@@ -34,7 +43,8 @@
         circleRadius,
         hoverfactor,
         "/Content/Img/Index/building.jpeg",
-        new ImageDescription(canvas, "Firma", ["Kontakt", "Team", "Geschichte"]));
+        new ImageDescription(canvas, "Firma", ["Kontakt", "Team", "Geschichte"]),
+        "/Home/Contact");
 
     var canvasManager = new CanvasManager(
         canvas,
@@ -61,19 +71,19 @@ resizeDescriptionContainer = function() {
     $descContainer.height(height);
 }
 
-getImages = function (canvas, radius, hoverFactor, imgLinks, imgDescriptions) {
+getImages = function (canvas, radius, hoverFactor, imgLinks, forwardUrls, imgDescriptions) {
 
-    if (!isArray(imgLinks) || !isArray(imgDescriptions)) {
-        throw "links and descriptions must be arrays!";
+    if (!isArray(imgLinks) || !isArray(forwardUrls) || !isArray(imgDescriptions)) {
+        throw "links, urls and descriptions must be arrays!";
     }
 
-    if (imgLinks.length !== imgDescriptions.length) {
-        throw "link list and description list must have the same length!";
+    if (imgLinks.length !== imgDescriptions.length || imgLinks.length !== forwardUrls.length) {
+        throw "link-, url- and description list must have the same length!";
     }
 
     var retList = [];
     for (var i = 0; i < imgLinks.length; i++) {
-        retList.push(new CanvasImage(canvas, radius, hoverFactor, imgLinks[i], imgDescriptions[i]));
+        retList.push(new CanvasImage(canvas, radius, hoverFactor, imgLinks[i], imgDescriptions[i], forwardUrls[i]));
     }
 
     return retList;
