@@ -83,7 +83,7 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
     };
     this.setY = function (posY) {
         y = validateNumber(posY);
-        imgDescription.setY(y);
+        imgDescription.setY(y - radius * 0.5); // First quarter of bubble height
     };
     this.draw = function (hovered) {
 
@@ -105,7 +105,7 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
         return correctX && correctY;
     };
     this.openSite = function () {
-        window.open(forwardUrl, "self");
+        window.open(forwardUrl, "_self");
     }
 };
 

@@ -3,8 +3,8 @@
 
     title = validateString(title);
     var context = canvas.getContext("2d");
-    var titleFontSize = 28;
-    var subSitesFontSize = titleFontSize / 2;
+    var titleFontSize = 35;
+    var subSitesFontSize = 22 // titleFontSize / 2;
 
     var x = 0;
     var y = 0;
