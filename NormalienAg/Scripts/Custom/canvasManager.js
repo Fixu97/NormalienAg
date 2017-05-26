@@ -160,9 +160,10 @@ window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, 
             c.closePath();
             c.stroke();
 
-            curImg.draw(false);
+            // Pass impossible coordinates so nothing will get hovered
+            curImg.draw(Number.MIN_VALUE, Number.MIN_VALUE);
         }
-        centerImage.draw(false);
+        centerImage.draw(Number.MIN_VALUE, Number.MIN_VALUE);
         c.restore();
     }
 
@@ -182,6 +183,7 @@ window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, 
             }
             curHoveredImg = curImg;
             curHoveredImgIndex = i;
+            break;
         }
         
         var position = null;
@@ -197,19 +199,28 @@ window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, 
             return;
         }
 
-        // A new img is being hovered
-        if (curHoveredImg !== null && (hoveredImage === null || hoveredImage !== curHoveredImg)) {
-            curHoveredImg.draw(true);
-            $canvas.css("cursor", "pointer");
-            hoveredImage = curHoveredImg;
+        // The same img is being hovered
+        if (curHoveredImg !== null && hoveredImage !== null && hoveredImage === curHoveredImg) {
+            curHoveredImg.draw(e.offsetX, e.offsetY);
             return;
         }
 
         // An img is not hovered anymore
-        if (curHoveredImg === null && hoveredImage !== null) {
+        if (curHoveredImg === null || curHoveredImg !== null && hoveredImage !== null && curHoveredImg !== hoveredImage) {
             hoveredImage = null;
             self.draw();
             $canvas.css("cursor", "default");
+            return;
+        }
+
+        // A new img is being hovered
+        if (curHoveredImg !== null && (hoveredImage === null || hoveredImage !== null && curHoveredImg !== hoveredImage)) {
+
+            curHoveredImg.draw(e.offsetX, e.offsetY);
+            $canvas.css("cursor", "pointer");
+            hoveredImage = curHoveredImg;
+
+            return;
         }
     }
     var clickAction = function (e) {
@@ -222,14 +233,14 @@ window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, 
 
             if (curImg.isAtPosition(e.offsetX, e.offsetY)) {
                 console.log("CanvasImage is being clicked!");
-                curImg.openSite();
+                curImg.openSite(e.offsetX, e.offsetY);
                 return;
             }
         }
 
         if (centerImage.isAtPosition(e.offsetX, e.offsetY)) {
             console.log("CenterImage is being clicked!");
-            centerImage.openSite();
+            centerImage.openSite(e.offsetX, e.offsetY);
         }
     }
 

@@ -29,13 +29,13 @@
             "#"
         ],
         [
-            new ImageDescription(canvas, "Formenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-            new ImageDescription(canvas, "Werkzeugbau", ["Plattenbearbeitungen", "Schnittwerkzeuge", "Biegewerkzeuge", "Konstruktionen", "Hartbearbeitungen"]),
-            new ImageDescription(canvas, "Maschinenbau", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-            new ImageDescription(canvas, "Download", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-            new ImageDescription(canvas, "Gewindeformen", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-            new ImageDescription(canvas, "Führungselemente", ["Beschreibung1", "Beschreibung2", "Beschreibung3"]),
-            new ImageDescription(canvas, "Montage", ["Beschreibung1", "Beschreibung2", "Beschreibung3"])
+            new ImageDescription(canvas, "Formenbau", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")]),
+            new ImageDescription(canvas, "Werkzeugbau", [new Site("Plattenbearbeitungen", "#"), new Site("Schnittwerkzeuge", "#"), new Site("Biegewerkzeuge", "#"), new Site("Konstruktionen", "#"), new Site("Hartbearbeitungen", "#")]),
+            new ImageDescription(canvas, "Maschinenbau", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")]),
+            new ImageDescription(canvas, "Download", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")]),
+            new ImageDescription(canvas, "Gewindeformen", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")]),
+            new ImageDescription(canvas, "Führungselemente", [new Site("Normführungselemente", "#"), new Site("Spezialanfertigungen", "#"), new Site("Preislisten")]),
+            new ImageDescription(canvas, "Montage", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")])
         ]);
 
     var kontakt = new CanvasImage(
@@ -43,8 +43,8 @@
         circleRadius,
         hoverfactor,
         "/Content/Img/Index/building.jpeg",
-        new ImageDescription(canvas, "Firma", ["Kontakt", "Team", "Geschichte"]),
-        "/Home/Contact");
+        new ImageDescription(canvas, "Firma", [new Site("Kontakt", "/Firma/Kontakt"), new Site("Team", "/Firma/Team"), new Site("Geschichte", "/Firma/Geschichte")]),
+        "/Firma/Kontakt");
 
     var canvasManager = new CanvasManager(
         canvas,

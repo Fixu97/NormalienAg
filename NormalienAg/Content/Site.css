@@ -3,7 +3,7 @@ body{
 	background-image: url("/Content/Img/background.jpg");
 	background-repeat: repeat;
 	
-	font-family: "Arial Light" !important;
+	font-family: "Arial Light", Arial, Helvetica, sans-serif !important;
 	font-size: 15px !important;
 }
 

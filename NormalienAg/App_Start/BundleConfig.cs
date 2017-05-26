@@ -15,11 +15,11 @@ namespace NormalienAg
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                        "~/Scripts/Custom/Model/canvasElementHelper.js",
                         "~/Scripts/Custom/Model/canvasConfig.js",
                         "~/Scripts/Custom/Model/circle.js",
+                        "~/Scripts/Custom/Model/site.js",
                         "~/Scripts/Custom/Model/imageDescription.js",
-                        "~/Scripts/Custom/Model/imageHelper.js",
-                        "~/Scripts/Custom/Model/customImage.js",
                         "~/Scripts/Custom/Model/canvasImage.js",
                         "~/Scripts/Custom/canvasManager.js",
                         "~/Scripts/Custom/global.js"));

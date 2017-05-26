@@ -16,11 +16,11 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
     var x = 0;
     var y = 0;
 
-    var draw = function (radius, self) {
+    var draw = function (radius, mouseX, mouseY, self) {
         "use strict";
 
         // asynchronos call
-        self.getImage(imgSrc, function () {
+        getImage(imgSrc, function () {
 
             // save context
             context.save();
@@ -30,7 +30,7 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
             var diameter = 2 * radius;
             var fillColor = "rgba(150, 150, 150, 0.8)";
 
-            var prop = self.getNewImgProportion(img, diameter, diameter);
+            var prop = getNewImgProportion(img, diameter, diameter);
 
             var circle = new Circle(context, x, y, radius, fillColor);
 
@@ -42,7 +42,7 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
             circle.draw(lineWidth);
             context.clip();
 
-            var pos = self.getImgPosFromCenter(x, y, prop.width, prop.height);
+            var pos = getImgPosFromCenter(x, y, prop.width, prop.height);
 
             context.drawImage(img, pos.x, pos.y, prop.width, prop.height);
             context.stroke();
@@ -61,7 +61,7 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
                 // reset fillStyle
                 context.fillStyle = previousFillStyle;
 
-                imgDescription.print();
+                imgDescription.print(mouseX, mouseY);
             } else {
                 $("#descriptionContainer").empty();
             }
@@ -69,7 +69,48 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
             // restore context
             context.restore();
         });
-    }
+    };
+    var getImgPosFromCenter = function (centerX, centerY, width, height) {
+        "use strict";
+        
+        var pos = {};
+        
+        pos.x = centerX - 0.5 * width;
+        pos.y = centerY - 0.5 * height;
+        
+        return pos;
+    };    
+    var getNewImgProportion = function (img, maxWidth, maxHeight) {
+        "use strict";
+        
+        if (!img || typeof img !== "object" || !(img instanceof Image)) {
+            throw "Invalid paramteter img!";
+        }
+        
+        maxWidth = validateNumber(maxWidth);
+        maxHeight = validateNumber(maxHeight);
+        
+        var aspectRatio = img.width / img.height,
+            newWidth,
+            newHeight;
+
+        if (aspectRatio > 1) {
+            newHeight = maxHeight;
+            newWidth = newHeight * aspectRatio;
+        } else {
+            newWidth = maxWidth;
+            newHeight = newWidth / aspectRatio;
+        }
+        
+        return {width: newWidth, height: newHeight};
+    };    
+    var getImage = function (src, successHandler, errorHandler) {
+        "use strict";
+        var img = new Image();
+        img.onload = successHandler;
+        img.onerror = errorHandler;
+        img.src = src;
+    };
     
     this.getX = function () {
         return x;
@@ -85,28 +126,46 @@ window.CanvasImage = function (canvas, radius, hoverFactor, imgSrc, imgDescripti
         y = validateNumber(posY);
         imgDescription.setY(y - radius * 0.5); // First quarter of bubble height
     };
-    this.draw = function (hovered) {
+    this.draw = function (mouseX, mouseY) {
 
-        isHovered = validateBool(hovered);
+        mouseX = validateNumber(mouseX);
+        mouseY = validateNumber(mouseY);
+
+        isHovered = this.isAtPosition(mouseX, mouseY);
         var curRadius = radius;
         if (isHovered) {
             curRadius *= hoverFactor;
         }
-        draw(curRadius, this);
+        draw(curRadius, mouseX, mouseY, this);
     };    
     this.isAtPosition = function (mouseX, mouseY) {
 
         mouseX = validateNumber(mouseX);
         mouseY = validateNumber(mouseY);
 
-        var correctX = mouseX > x - radius && mouseX < x + radius;
-        var correctY = mouseY > y - radius && mouseY < y + radius;
+        var newRadius = radius;
+        if (isHovered) {
+            newRadius *= hoverFactor;
+        }
+
+        var correctX = mouseX > x - newRadius && mouseX < x + newRadius;
+        var correctY = mouseY > y - newRadius && mouseY < y + newRadius;
 
         return correctX && correctY;
     };
-    this.openSite = function () {
-        window.open(forwardUrl, "_self");
+    this.openSite = function (mouseX, mouseY) {
+
+        var hoveredSubsite = imgDescription.getHoveredSite(mouseX, mouseY);
+        var urlToOpen = "#";
+
+        // Decide which url to take for forwarding
+        if (hoveredSubsite !== null && isDefined(hoveredSubsite.getUrl())) {
+            urlToOpen = hoveredSubsite.getUrl();
+        } // else {
+        //    urlToOpen = forwardUrl;
+        //}
+        this.forward(urlToOpen);
     }
 };
 
-window.CanvasImage.prototype = Object.create(window.ImageHelper.prototype);
+window.CanvasImage.prototype = Object.create(window.CanvasElementHelper.prototype);
