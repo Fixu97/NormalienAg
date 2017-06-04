@@ -76,3 +76,24 @@ hr{
     float:left;
     width: 49%;
 }
+
+/*End of Contact*/
+
+/*Start of Team*/
+
+.homeHistRow {
+    background-color:#ddd;
+    margin-bottom:30px;
+    padding:15px 0 15px 0;
+    box-shadow: 5px 5px #bbb;
+}
+
+/*End of Team*/
+
+/*Start of Fuehrungselemente*/
+
+#katalog-table {
+    width:100%;
+}
+
+/*End of Fuehrungselemente*/

@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FirmaController.cs" />
+    <Compile Include="Controllers\FuehrungselementeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -188,7 +189,7 @@
     <Content Include="Content\Img\background.jpg" />
     <Content Include="Content\Img\building_old.jpg" />
     <Content Include="Content\Img\heinz.jpg" />
-    <Content Include="Content\Img\heinz.png" />
+    <Content Include="Content\Img\mitarbeiter.png" />
     <Content Include="Content\Img\image1.jpeg" />
     <Content Include="Content\Img\image6.jpeg" />
     <Content Include="Content\Img\index\building.jpeg" />
@@ -201,6 +202,7 @@
     <Content Include="Content\Img\index\werkzeugbau.jpeg" />
     <Content Include="Content\Img\logo.jpg" />
     <Content Include="Content\Img\logo.png" />
+    <Content Include="Content\Img\pdf.png" />
     <Content Include="Content\Img\schweissen.jpg" />
     <Content Include="Content\Img\team.jpg" />
     <Content Include="Content\Img\teil1.jpg" />
@@ -272,10 +274,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Firma\Team.cshtml" />
     <Content Include="Views\Firma\Geschichte.cshtml" />
+    <Content Include="Views\Fuehrungselemente\Fuehrungselemente.cshtml" />
+    <Content Include="Views\Fuehrungselemente\Spezialanfertigungen.cshtml" />
+    <Content Include="Views\Fuehrungselemente\Preislisten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Fuehrungselemente\" />
+    <Folder Include="Content\Img\Fuehrungselemente\Katalog\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

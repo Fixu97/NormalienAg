@@ -34,7 +34,7 @@
             new ImageDescription(canvas, "Maschinenbau", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")]),
             new ImageDescription(canvas, "Download", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")]),
             new ImageDescription(canvas, "Gewindeformen", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")]),
-            new ImageDescription(canvas, "Führungselemente", [new Site("Normführungselemente", "#"), new Site("Spezialanfertigungen", "#"), new Site("Preislisten")]),
+            new ImageDescription(canvas, "Führungselemente", [new Site("Normführungselemente", "/Fuehrungselemente"), new Site("Spezialanfertigungen", "/Fuehrungselemente/Spezialanfertigungen"), new Site("Preislisten", "/Fuehrungselemente/Preislisten")]),
             new ImageDescription(canvas, "Montage", [new Site("Beschreibung1"), new Site("Beschreibung2"), new Site("Beschreibung3")])
         ]);
 
