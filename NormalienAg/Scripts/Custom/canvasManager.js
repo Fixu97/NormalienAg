@@ -1,11 +1,19 @@
 ﻿
-window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, canvasImages) {
+window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, canvasImages, form) {
     "use strict";
 
     var $canvas = $(canvas);
     var c = canvas.getContext("2d"); // context
     pictoRadius = validateNumber(pictoRadius);
     hoverFactor = validateNumber(hoverFactor);
+
+    if (!isDefined(form)) {
+        form = "round";
+    }
+
+    if (form !== "round" && form !== "oval") {
+        throw "parameter form must be either null, 'round' or 'oval'";
+    }
     
     var scaleCanvas = function () {
 
@@ -55,7 +63,18 @@ window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, 
         var width = $canvas.width();
         var height = $canvas.height();
 
-        return { x: width / 2, y: height / 2 };
+        var x = width / 2;
+        var y = 0;
+
+        if (form === "round") {
+            y = height / 2;
+        } else if (form === "oval") {
+            y = height / 2 - 0.2 * circleRadius;
+        } else {
+            throw "Invalid value of variable 'form'!";
+        }
+
+        return { x: x, y: y };
     }
 
     var validateParams = function (i, nrOfPoints) {
@@ -88,14 +107,28 @@ window.CanvasManager = function (canvas, pictoRadius, hoverFactor, centerImage, 
 
         validateParams(i, nrOfPoints);
         var angle = getAngle(i, nrOfPoints);
-        return Math.cos(angle) * circleRadius + circleCenter.x;
+
+        if (form === "round") {
+            return Math.cos(angle) * circleRadius + circleCenter.x;
+        } else if (form === "oval") {
+            return Math.cos(angle) * circleRadius /* * 1.2 */ + circleCenter.x;
+        } else {
+            throw "Invalid value of variable 'form'!";
+        }
     }
     var getPosY = function (i, nrOfPoints) {
         "use strict";
 
         validateParams(i, nrOfPoints);
         var angle = getAngle(i, nrOfPoints);
-        return Math.sin(angle) * (-1) * circleRadius + circleCenter.y;
+
+        if (form === "round") {
+            return Math.sin(angle) * (-1) * circleRadius + circleCenter.y; // Normal circle
+        } else if (form === "oval") {
+            return Math.sin(angle) * (-1) * circleRadius * 0.8 + circleCenter.y; // Oval
+        } else {
+            throw "Invalid value of variable 'form'!";
+        }
     }
     var getPositions = function (i, nrOfPoints) {
         return {

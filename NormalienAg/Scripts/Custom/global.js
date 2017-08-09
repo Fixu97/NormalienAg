@@ -51,7 +51,8 @@
         circleRadius,
         hoverfactor,
         kontakt,
-        canvasImages);
+        canvasImages,
+        "oval");
     
     // Draw elements
     canvasManager.draw();

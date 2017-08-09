@@ -92,8 +92,17 @@ hr{
 
 /*Start of Fuehrungselemente*/
 
-#katalog-table {
+.katalog-table {
     width:100%;
+}
+
+.katalog-table td {
+    height: 50px;
+    padding-left:10px;
+}
+
+.katalog-table tr:nth-child(2n+1){
+    background-color: #ddd;
 }
 
 /*End of Fuehrungselemente*/
